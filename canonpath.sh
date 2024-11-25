@@ -21,6 +21,10 @@ canonpath() {
       would resolve to 'a/b/'.
     "
 
+    # I have posted this function as an
+    # [answer](https://apple.stackexchange.com/a/444039/61160), with testing examples.
+
+
     # function docs
     [[ $# -eq 0 || $1 == -h ]] && {
         [[ -n $( command -v docsh ) ]] &&
@@ -66,6 +70,7 @@ canonpath() {
         tgt_dir=$( command dirname -- "$tgt" )
 
         # symlink target may be absolute or relative path
+        # - readlink prints path if symlink or nothing and status=1 for non-symlink
         # tgt=$( command readlink "$tgt" )
         # - use 'file' to resolve symlink, terminating the filename with NULL
         tgt=$( command file -bh0 "$tgt" | sed 's/^symbolic link to //' )
