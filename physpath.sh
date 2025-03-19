@@ -9,14 +9,14 @@
 #         | head -n $(( LINENO - 10 ))
 # fi
 
-import_func canon_dirpath \
+import_func phys_dirpath \
     || return 63
 
-canonpath() {
+physpath() {
 
-    : "Print canonical path, after resolving symlinks
+    : "Print physical path, after resolving symlinks
 
-    Usage: canonpath <path>
+    Usage: physpath <path>
 
     The path argument may be a symbolic link, file, or directory. This function prints
     the absolute path of the target with any symlinks or relative references
@@ -33,14 +33,14 @@ canonpath() {
 
       - Symlinks in the path are resolved after instances of '..', using the shell
         built-in command 'cd -L'. For more on the '-P' and '-L' options to cd and
-        pwd, refer to the canon_dirpath function documentation.
+        pwd, refer to the phys_dirpath function documentation.
 
       - This function is posted as an [answer](https://apple.stackexchange.com/a/444039/61160),
         with testing examples.
 
       - It's possible to write short alternatives to this function that may do all
         that's needed for a particular application. E.g., if you know the path is a
-        directory, you can call the canon_dirpath function directly, or use a one-liner
+        directory, you can call the phys_dirpath function directly, or use a one-liner
         similar to:
 
         dir=\$( cd -- \"\$path\" &> /dev/null  && pwd -P )
@@ -90,8 +90,8 @@ canonpath() {
     # NB, shell test -d resolves symlinks
     if [[ -d $pth ]]
     then
-        # canon_dirpath handles directory paths
-        canon_dirpath "${opts[@]}" "$pth"
+        # phys_dirpath handles directory paths
+        phys_dirpath "${opts[@]}" "$pth"
 
     else
         # file, or symlink to a file
@@ -126,7 +126,7 @@ canonpath() {
 
 
         local dn bn
-        dn=$( canon_dirpath "${opts[@]}" "$( dirname -- "$pth" )" )
+        dn=$( phys_dirpath "${opts[@]}" "$( dirname -- "$pth" )" )
         bn=$( basename -- "$pth" )
 
         printf '%s/%s\n' "$dn" "$bn"

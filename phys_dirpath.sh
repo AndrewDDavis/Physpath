@@ -1,10 +1,10 @@
-canon_dirpath() {
+phys_dirpath() {
 
     [[ $# -eq 0  || $1 == @(-h|--help) ]] && {
 
-        : "Print canonical path of a directory
+        : "Print physical path of a directory
 
-        Usage: canon_dirpath [-L|-P] <path>
+        Usage: phys_dirpath [-L|-P] <path>
 
         Given the path of a directory, or a symlink that points to a directory, this
         function prints its absolute path after dereferencing any symlinks and relative
@@ -12,8 +12,8 @@ canon_dirpath() {
         -L and -P options determine how instances of '..' are resolved in paths with
         symlinks, as explained below.
 
-        To print the canonical path of a file that may itself be a symlink, use the
-        \`canonpath\` function.
+        To print the physical path of a file that may itself be a symlink, use the
+        \`physpath\` function.
 
         Background on cd and pwd
 
@@ -49,7 +49,7 @@ canon_dirpath() {
         # /tmp/d1/d2
 
         The 'cd -L' command form is used herein, followed by 'pwd -P'. However, all
-        arguments are passed to cd, so running 'canon_dirpath -P path' would
+        arguments are passed to cd, so running 'phys_dirpath -P path' would
         resolve any instances of '..' after resolving any symlinks in the path.
 
         As a side note, both cd and pwd run as the '-L' version by default. However,
