@@ -2,7 +2,7 @@ phys_dirpath() {
 
     [[ $# -eq 0  || $1 == @(-h|--help) ]] && {
 
-        : "Print physical path of a directory
+        : """Print physical path of a directory
 
         Usage: phys_dirpath [-L|-P] <path>
 
@@ -57,7 +57,7 @@ phys_dirpath() {
         options uses the 'cd -P' and 'pwd -P' versions. This may also affect any path
         shown in the shell prompt. Explicitly calling the commands with either the
         '-L' or '-P' option is recommneded when troubleshooting.
-        "
+        """
         docsh -TD
         return
     }

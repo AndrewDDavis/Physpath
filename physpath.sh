@@ -1,14 +1,14 @@
 # dependencies
 # - implied: err_msg, docsh
 import_func phys_dirpath \
-    || return 63
+    || return
 
 physpath() {
 
     # docs
     if [[ $# -eq 0  || $1 == @(-h|--help) ]]
     then
-        : "Print physical path, after resolving symlinks
+        : """Print physical path, after resolving symlinks
 
         Usage: physpath <path>
 
@@ -52,7 +52,7 @@ physpath() {
             output of 'dirname \${BASH_SOURCE[0]}' for the path. However, this fails in the
             common case that the basename of the path is a symlink. The subtleties that can
             happen when resolving symlinks is the reason this function exists.
-        "
+        """
         docsh -TD
         return
     fi
